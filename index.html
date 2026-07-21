@@ -1,611 +1,132 @@
 <!DOCTYPE html>
-<html lang="ur">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Buy Pakistan | Official Mega Mall</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #f1f3f6;
-            color: #333;
-            padding-bottom: 70px;
-        }
-
-        /* Top Announcement */
-        .top-announcement {
-            background: #111;
-            color: #fff;
-            font-size: 11px;
-            text-align: center;
-            padding: 6px;
-            letter-spacing: 0.5px;
-        }
-
-        /* Header */
-        header {
-            background-color: #075e54;
-            color: white;
-            padding: 12px 15px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        .nav-container {
-            max-width: 800px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo h1 {
-            font-size: 20px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
-
-        .cart-icon-btn {
-            position: relative;
-            background: #25d366;
-            color: white;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 13px;
-            cursor: pointer;
-        }
-
-        .cart-count {
-            background: red;
-            color: white;
-            border-radius: 50%;
-            padding: 2px 6px;
-            font-size: 10px;
-            position: absolute;
-            top: -5px;
-            right: -5px;
-        }
-
-        /* Search & Info */
-        .search-container {
-            max-width: 800px;
-            margin: 12px auto;
-            padding: 0 12px;
-        }
-
-        .search-bar {
-            width: 100%;
-            padding: 12px 20px;
-            border-radius: 30px;
-            border: 2px solid #075e54;
-            outline: none;
-            font-size: 14px;
-        }
-
-        /* Hero Banner */
-        .hero-banner {
-            max-width: 800px;
-            margin: 10px auto;
-            padding: 0 12px;
-        }
-
-        .banner-box {
-            background: linear-gradient(135deg, #075e54, #128c7e);
-            color: white;
-            border-radius: 12px;
-            padding: 25px 20px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .banner-box h2 { font-size: 22px; margin-bottom: 5px; }
-        .banner-box p { font-size: 13px; opacity: 0.9; }
-
-        /* Trust Badges */
-        .features-grid {
-            max-width: 800px;
-            margin: 15px auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            padding: 0 12px;
-            text-align: center;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 10px 5px;
-            border-radius: 8px;
-            font-size: 11px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-            border: 1px solid #e2e2e2;
-        }
-
-        /* Categories Bar */
-        .categories-title {
-            max-width: 800px;
-            margin: 20px auto 10px auto;
-            padding: 0 12px;
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        .cat-slider {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            max-width: 800px;
-            margin: 0 auto 20px auto;
-            padding: 0 12px;
-            scrollbar-width: none;
-        }
-
-        .cat-chip {
-            background: white;
-            padding: 10px 18px;
-            border-radius: 25px;
-            font-size: 13px;
-            font-weight: 600;
-            white-space: nowrap;
-            border: 1px solid #ddd;
-            cursor: pointer;
-        }
-
-        .cat-chip.active {
-            background: #075e54;
-            color: white;
-            border-color: #075e54;
-        }
-
-        /* Products Grid */
-        .products-grid {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 12px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
-
-        @media (min-width: 600px) {
-            .products-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            border: 1px solid #eef;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .product-img {
-            width: 100%;
-            height: 170px;
-            object-fit: cover;
-        }
-
-        .product-body {
-            padding: 10px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .product-title {
-            font-size: 13px;
-            font-weight: bold;
-            color: #222;
-            height: 36px;
-            overflow: hidden;
-        }
-
-        .rating {
-            color: #ff9f43;
-            font-size: 11px;
-            margin: 4px 0;
-        }
-
-        .price-box {
-            margin: 6px 0;
-        }
-
-        .old-price {
-            font-size: 11px;
-            color: #888;
-            text-decoration: line-through;
-        }
-
-        .price {
-            font-size: 15px;
-            font-weight: bold;
-            color: #25d366;
-        }
-
-        .btn-add-cart {
-            width: 100%;
-            background: #075e54;
-            color: white;
-            border: none;
-            padding: 8px;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 12px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .btn-add-cart:active { transform: scale(0.96); }
-
-        /* Reviews Section */
-        .reviews-section {
-            max-width: 800px;
-            margin: 30px auto;
-            padding: 0 12px;
-        }
-
-        .review-card {
-            background: white;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            font-size: 12px;
-            border-left: 4px solid #25d366;
-        }
-
-        /* Slide-out Cart Drawer */
-        .cart-modal {
-            display: none;
-            position: fixed;
-            top: 0; right: 0; bottom: 0; left: 0;
-            background: rgba(0,0,0,0.6);
-            z-index: 2000;
-            justify-content: flex-end;
-        }
-
-        .cart-content {
-            background: white;
-            width: 85%;
-            max-width: 380px;
-            height: 100%;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .cart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-
-        .cart-items-list {
-            flex-grow: 1;
-            overflow-y: auto;
-            margin: 15px 0;
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid #f9f9f9;
-            font-size: 12px;
-        }
-
-        .btn-checkout-whatsapp {
-            background: #25d366;
-            color: white;
-            text-align: center;
-            padding: 12px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-            display: block;
-        }
-
-        footer {
-            background: #222;
-            color: white;
-            text-align: center;
-            padding: 25px 15px;
-            font-size: 12px;
-            margin-top: 40px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Buy Pakistan</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+    body { background-color: #f4f4f9; padding-bottom: 60px; }
+    header { background-color: #00875a; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+    .cart-btn { background-color: #25d366; color: white; padding: 8px 16px; border-radius: 20px; font-weight: bold; border: none; cursor: pointer; }
+    .hero { background: #1a1a1a; color: white; text-align: center; padding: 15px; }
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; padding: 15px; max-width: 1000px; margin: auto; }
+    .product-card { background: white; border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: space-between; }
+    .product-card img { width: 100%; height: 180px; object-fit: contain; border-radius: 8px; margin-bottom: 10px; }
+    .product-card h3 { font-size: 14px; margin-bottom: 8px; color: #333; height: 36px; overflow: hidden; }
+    .price { margin-bottom: 10px; }
+    .old-price { text-decoration: line-through; color: #888; font-size: 12px; margin-right: 5px; }
+    .new-price { color: #d9534f; font-weight: bold; font-size: 16px; }
+    .add-to-cart { background-color: #00875a; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; width: 100%; cursor: pointer; }
+    .add-to-cart:active { background-color: #005f3f; }
+  </style>
 </head>
 <body>
 
-    <div class="top-announcement">
-        🎉 Grand Sale: Up to 50% OFF | Free Shipping Pakistan Wide!
+  <header>
+    <h2>Smart Buy PK</h2>
+    <button class="cart-btn" onclick="openCart()">🛒 Cart (<span id="cart-count">0</span>)</button>
+  </header>
+
+  <section class="hero">
+    <h2>Smart Buy Pakistan</h2>
+    <p style="font-size: 12px; color: #ccc; margin-top: 5px;">Official WhatsApp Orders & Helpline: 0308-9562702</p>
+  </section>
+
+  <main class="product-grid">
+
+    <!-- Product 1: Maroon Ishq T-Shirt -->
+    <div class="product-card">
+      <img src="1.jpg" alt="Maroon Ishq Printed T-Shirt">
+      <h3>Maroon "Ishq" Printed T-Shirt</h3>
+      <div class="price">
+        <span class="old-price">Rs. 1,999</span> 
+        <span class="new-price">Rs. 999</span>
+      </div>
+      <button class="add-to-cart" onclick="addToCart('Maroon Ishq T-Shirt', 999)">Add To Cart</button>
     </div>
 
-    <header>
-        <div class="nav-container">
-            <div class="logo">
-                <h1>Smart Buy PK</h1>
-            </div>
-            <button class="cart-icon-btn" onclick="toggleCart()">
-                🛒 Cart <span class="cart-count" id="cartCount">0</span>
-            </button>
-        </div>
-    </header>
-
-    <div class="search-container">
-        <input type="text" class="search-bar" placeholder="🔍 Search among 1000+ products..." id="searchInput" onkeyup="filterProducts()">
+    <!-- Product 2: Silver Watch -->
+    <div class="product-card">
+      <img src="2.jpg" alt="AW Collection Silver Watch">
+      <h3>AW Collection Silver Heart Dial Watch</h3>
+      <div class="price">
+        <span class="old-price">Rs. 1,999</span> 
+        <span class="new-price">Rs. 999</span>
+      </div>
+      <button class="add-to-cart" onclick="addToCart('AW Silver Heart Watch', 999)">Add To Cart</button>
     </div>
 
-    <div class="hero-banner">
-        <div class="banner-box">
-            <h2>MEGA MONSOON SALE</h2>
-            <p>Best Quality Products Delivered To Your Doorstep</p>
-        </div>
+    <!-- Product 3: Football Grey T-Shirt -->
+    <div class="product-card">
+      <img src="3.jpg" alt="Football Crown Printed Grey T-Shirt">
+      <h3>Football Crown Graphic Printed T-Shirt</h3>
+      <div class="price">
+        <span class="old-price">Rs. 1,999</span> 
+        <span class="new-price">Rs. 999</span>
+      </div>
+      <button class="add-to-cart" onclick="addToCart('Football Graphic T-Shirt', 999)">Add To Cart</button>
     </div>
 
-    <!-- Trust Badges -->
-    <div class="features-grid">
-        <div class="feature-card">🚚 <b>Fast COD</b><br>All Pakistan</div>
-        <div class="feature-card">💯 <b>Quality</b><br>100% Guaranteed</div>
-        <div class="feature-card">💳 <b>Easy Payment</b><br>JazzCash / EP</div>
+    <!-- Product 4: PUBG Tracksuit -->
+    <div class="product-card">
+      <img src="4.jpg" alt="PUBG White Shirt & Black Trouser">
+      <h3>PUBG Printed T-Shirt & Trouser Set</h3>
+      <div class="price">
+        <span class="old-price">Rs. 1,999</span> 
+        <span class="new-price">Rs. 999</span>
+      </div>
+      <button class="add-to-cart" onclick="addToCart('PUBG Tracksuit Set', 999)">Add To Cart</button>
     </div>
 
-    <div class="categories-title">Shop By Categories</div>
-    <div class="cat-slider">
-        <div class="cat-chip active">All Collection</div>
-        <div class="cat-chip">Sportswear</div>
-        <div class="cat-chip">Smart Watches</div>
-        <div class="cat-chip">Earbuds & Audio</div>
-        <div class="cat-chip">Leather Accessories</div>
+    <!-- Product 5: Keychain Power Bank -->
+    <div class="product-card">
+      <img src="5.jpg" alt="Mini Emergency Keychain Power Bank">
+      <h3>Portable Mini Keychain Power Bank</h3>
+      <div class="price">
+        <span class="old-price">Rs. 1,999</span> 
+        <span class="new-price">Rs. 999</span>
+      </div>
+      <button class="add-to-cart" onclick="addToCart('Mini Keychain Power Bank', 999)">Add To Cart</button>
     </div>
 
-    <!-- Main Products Grid -->
-    <div class="products-grid" id="productGrid">
-
-        <!-- Product 1 -->
-        <div class="product-card" data-name="tracksuit sportswear">
-            <img src="https://via.placeholder.com/300x300?text=Tracksuit" class="product-img">
-            <div class="product-body">
-                <div class="product-title">Men's Premium Tracksuit Set</div>
-                <div class="rating">★★★★★ (49)</div>
-                <div class="price-box">
-                    <span class="old-price">Rs. 3,499</span>
-                    <div class="price">Rs. 2,499</div>
-                </div>
-                <button class="btn-add-cart" onclick="addToCart('Men\'s Premium Tracksuit', 2499)">+ Add To Cart</button>
-            </div>
-        </div>
-
-        <!-- Product 2 -->
-        <div class="product-card" data-name="smart watch bluetooth">
-            <img src="https://via.placeholder.com/300x300?text=Smart+Watch" class="product-img">
-            <div class="product-body">
-                <div class="product-title">Smart Watch Full HD Touch</div>
-                <div class="rating">★★★★☆ (112)</div>
-                <div class="price-box">
-                    <span class="old-price">Rs. 4,999</span>
-                    <div class="price">Rs. 3,199</div>
-                </div>
-                <button class="btn-add-cart" onclick="addToCart('Smart Watch HD', 3199)">+ Add To Cart</button>
-            </div>
-        </div>
-
-        <!-- Product 3 -->
-        <div class="product-card" data-name="bluetooth earbuds wireless">
-            <img src="https://via.placeholder.com/300x300?text=Earbuds" class="product-img">
-            <div class="product-body">
-                <div class="product-title">ANC Pro Wireless Earbuds</div>
-                <div class="rating">★★★★★ (88)</div>
-                <div class="price-box">
-                    <span class="old-price">Rs. 2,999</span>
-                    <div class="price">Rs. 1,699</div>
-                </div>
-                <button class="btn-add-cart" onclick="addToCart('ANC Pro Earbuds', 1699)">+ Add To Cart</button>
-            </div>
-        </div>
-
-        <!-- Product 4 -->
-        <div class="product-card" data-name="leather wallet mens">
-            <img src="https://via.placeholder.com/300x300?text=Leather+Wallet" class="product-img">
-            <div class="product-body">
-                <div class="product-title">Original Leather Slim Wallet</div>
-                <div class="rating">★★★★☆ (34)</div>
-                <div class="price-box">
-                    <span class="old-price">Rs. 1,800</span>
-                    <div class="price">Rs. 1,199</div>
-                </div>
-                <button class="btn-add-cart" onclick="addToCart('Leather Slim Wallet', 1199)">+ Add To Cart</button>
-            </div>
-        </div>
-
+    <!-- Product 6: Mobile Stand -->
+    <div class="product-card">
+      <img src="6.jpg" alt="Foldable Mobile Stand">
+      <h3>Adjustable Desktop Mobile Phone Stand</h3>
+      <div class="price">
+        <span class="old-price">Rs. 1,999</span> 
+        <span class="new-price">Rs. 999</span>
+      </div>
+      <button class="add-to-cart" onclick="addToCart('Mobile Phone Stand', 999)">Add To Cart</button>
     </div>
 
-    <!-- Customer Reviews -->
-    <div class="reviews-section">
-        <h3>Customer Reviews 💬</h3>
-        <br>
-        <div class="review-card">
-            <b>Ali Raza (Lahore)</b> — ★★★★★<br>
-            "Bohat zabardast quality hai tracksuit ki! Delivery bhi 2 din mein ho gayi."
-        </div>
-        <div class="review-card">
-            <b>Usman Khan (Karachi)</b> — ★★★★★<br>
-            "Smart watch best hai, battery 3 din nikal rahi hai. Highly recommended!"
-        </div>
-    </div>
+  </main>
 
-    <!-- Shopping Cart Modal -->
-    <div class="cart-modal" id="cartModal">
-        <div class="cart-content">
-            <div class="cart-header">
-                <h3>Your Shopping Cart</h3>
-                <button onclick="toggleCart()" style="border:none; background:none; font-size:18px; cursor:pointer;">✖</button>
-            </div>
-            <div class="cart-items-list" id="cartItemsList">
-                <p style="text-align:center; color:#888; margin-top:20px;">Cart is empty!</p>
-            </div>
-            <div>
-                <h4>Total: Rs. <span id="cartTotal">0</span></h4>
-                <br>
-                <a href="#" id="whatsappCheckoutBtn" class="btn-checkout-whatsapp" onclick="checkoutWhatsApp()">Checkout on WhatsApp</a>
-            </div>
-        </div>
-    </div>
+  <script>
+    let cartCount = 0;
+    let cartItems = [];
 
-    <footer>
-        <h2>Smart Buy Pakistan</h2>
-        <p style="margin: 8px 0; opacity: 0.8;">Official WhatsApp Orders & Helpline: 0308-9562702</p>
-        <p style="opacity: 0.5;">© 2026 Smart Buy Pakistan. All Rights Reserved.</p>
-    </footer>
+    function addToCart(productName, price) {
+      cartCount++;
+      cartItems.push({ name: productName, price: price });
+      document.getElementById('cart-count').innerText = cartCount;
+      alert(productName + " added to cart!");
+    }
 
-    <script>
-        let cart = [];
+    function openCart() {
+      if (cartCount === 0) {
+        alert("Your cart is empty!");
+      } else {
+        let message = "Order Details:%0A";
+        cartItems.forEach((item, index) => {
+          message += `${index + 1}. ${item.name} - Rs. ${item.price}%0A`;
+        });
+        message += `%0ATotal Items: ${cartCount}`;
+        window.open(`https://wa.me/923089562702?text=${message}`, '_blank');
+      }
+    }
+  </script>
 
-        function addToCart(title, price) {
-            cart.push({ title, price });
-            updateCartUI();
-            alert(title + ' Cart mein add ho gaya!');
-        }
-
-        function updateCartUI() {
-            document.getElementById('cartCount').innerText = cart.length;
-            let listHtml = '';
-            let total = 0;
-
-            cart.forEach((item, index) => {
-                total += item.price;
-                listHtml += `<div class="cart-item">
-                    <span>${item.title}</span>
-                    <b>Rs. ${item.price}</b>
-                </div>`;
-            });
-
-            if (cart.length > 0) {
-                document.getElementById('cartItemsList').innerHTML = listHtml;
-            } else {
-                document.getElementById('cartItemsList').innerHTML = '<p style="text-align:center; color:#888; margin-top:20px;">Cart is empty!</p>';
-            }
-
-            document.getElementById('cartTotal').innerText = total;
-        }
-
-        function toggleCart() {
-            let modal = document.getElementById('cartModal');
-            modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
-        }
-
-        function checkoutWhatsApp() {
-            if(cart.length === 0) {
-                alert("Pehle cart mein koi item add karein!");
-                return;
-            }
-
-            let message = "Salam Smart Buy Pakistan! Mujhe ye orders confirm karne hain:%0A";
-            let total = 0;
-
-            cart.forEach((item, index) => {
-                message += `${index+1}. *${item.title}* - Rs.${item.price}%0A`;
-                total += item.price;
-            });
-
-            message += `%0A*Total Bill:* Rs.${total}`;
-            message += `%0A%0AMera Naam:%0AMera Address:`;
-
-            let waUrl = `https://wa.me/923089562702?text=${message}`;
-            window.open(waUrl, '_blank');
-        }
-
-        function filterProducts() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.getElementsByClassName('product-card');
-
-            for (let card of cards) {
-                let name = card.getAttribute('data-name');
-                card.style.display = name.includes(input) ? 'flex' : 'none';
-            }
-        }
-    </script>
 </body>
-</html><!-- Product 1: Navy Ishq T-Shirt -->
-<div class="product-card">
-  <img src="6892.jpg" alt="Navy Blue Ishq Printed T-Shirt">
-  <h3>Navy Blue "Ishq" Printed T-Shirt</h3>
-  <p class="price">
-    <span class="old-price">Rs. 1,999</span> 
-    <span class="new-price">Rs. 999</span>
-  </p>
-  <button class="add-to-cart">Add To Cart</button>
-</div>
-
-<!-- Product 2: Silver Chain Ladies Watch -->
-<div class="product-card">
-  <img src="5230.png" alt="AW Collection Silver Watch">
-  <h3>AW Collection Silver Heart Dial Watch</h3>
-  <p class="price">
-    <span class="old-price">Rs. 1,999</span> 
-    <span class="new-price">Rs. 999</span>
-  </p>
-  <button class="add-to-cart">Add To Cart</button>
-</div>
-
-<!-- Product 3: PUBG Tracksuit Set -->
-<div class="product-card">
-  <img src="7280.jpg" alt="PUBG White Shirt & Black Trouser">
-  <h3>PUBG Printed T-Shirt & Trouser Set</h3>
-  <p class="price">
-    <span class="old-price">Rs. 1,999</span> 
-    <span class="new-price">Rs. 999</span>
-  </p>
-  <button class="add-to-cart">Add To Cart</button>
-</div>
-
-<!-- Product 4: Mini Power Bank Keychain -->
-<div class="product-card">
-  <img src="6330.jpg" alt="Mini Emergency Keychain Power Bank">
-  <h3>Portable Mini Keychain Power Bank</h3>
-  <p class="price">
-    <span class="old-price">Rs. 1,999</span> 
-    <span class="new-price">Rs. 999</span>
-  </p>
-  <button class="add-to-cart">Add To Cart</button>
-</div>
-
-<!-- Product 5: OPPO Smartphone -->
-<div class="product-card">
-  <img src="1608.webp" alt="OPPO Smartphone">
-  <h3>OPPO Slim Edition Smartphone</h3>
-  <p class="price">
-    <span class="old-price">Rs. 1,999</span> 
-    <span class="new-price">Rs. 999</span>
-  </p>
-  <button class="add-to-cart">Add To Cart</button>
-</div>
-
-<!-- Product 6: Mobile Desktop Stand -->
-<div class="product-card">
-  <img src="6332.jpg" alt="Foldable Mobile Stand">
-  <h3>Adjustable Desktop Mobile Phone Stand</h3>
-  <p class="price">
-    <span class="old-price">Rs. 1,999</span> 
-    <span class="new-price">Rs. 999</span>
-  </p>
-  <button class="add-to-cart">Add To Cart</button>
-</div>
-
+</html>
